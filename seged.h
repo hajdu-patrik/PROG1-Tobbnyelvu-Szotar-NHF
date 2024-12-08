@@ -1,4 +1,3 @@
-// Hajdú Patrik Zsolt – RP329D – utolsó frissítés dátuma: 2024.11.19
 #ifndef SEGED_H
 #define SEGED_H
 
