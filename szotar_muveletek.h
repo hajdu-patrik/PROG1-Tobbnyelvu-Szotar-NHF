@@ -1,4 +1,3 @@
-// Hajdú Patrik Zsolt – RP329D – utolsó frissítés dátuma: 2024.11.19
 #ifndef SZOTAR_MUVELETEK_H_INCLUDED
 #define SZOTAR_MUVELETEK_H_INCLUDED
 
