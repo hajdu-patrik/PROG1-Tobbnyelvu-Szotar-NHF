@@ -25,8 +25,11 @@ int main() {
 
     Uj_Szo_Add(Fo_Lista, 1, "poire", "korte");
     Uj_Szo_Add(Fo_Lista, 1, "ours", "medve");
-    
-    Uj_Szo_Add(Fo_Lista, 1, "apfel", "alma");
+    Uj_Szo_Add(Fo_Lista, 1, "pomme", "alma");
+
+    Uj_Szo_Add(Fo_Lista, 2, "apfel", "alma");
+    Uj_Szo_Add(Fo_Lista, 2, "hund", "kutya");
+    Uj_Szo_Add(Fo_Lista, 2, "tragen", "medve");
 
 
     char Menupont_Bemenet[50+1];
@@ -43,7 +46,7 @@ int main() {
 
         if(Menu_Hossza == 1 && isdigit(Menupont_Bemenet[0])) {
             Valasztott_Menupont = Menupont_Bemenet[0] - '0';
-            if(Valasztott_Menupont < 0 || Valasztott_Menupont > 4) {
+            if(Valasztott_Menupont < 0 || Valasztott_Menupont > 5) {
                 Valasztott_Menupont = -1;
             }
         } else {
@@ -378,8 +381,77 @@ int main() {
                 Torol_Szotar_Felirat();
                 Tovabb_Gombra("\tSIKER: A fajl sikeresen beolvasva a szotarak koze!");
             } break;
-
+            
+            /*
             case 4: {
+
+                Konzol_Torles();
+                char Keresett_Szo[50+1];
+                Szoveg_Beolvas(true, "Add meg a szot, amelynek az osszes nyelven elerheto megfelelojet szeretned megtekinteni, ha szerepel valamelyik szotarban:", Keresett_Szo, -1, "", true, "Nem tartalmazhat egy szo szamot!");
+
+                bool van_e_barmelyikben = false;
+                int j = 0;
+                for(Lista *iter = Fo_Lista; iter != NULL; iter = iter->kov) {
+                    for(int i = 0; i < iter->szotar.szoparok_szama; i++) {
+                        if(strcmp(Keresett_Szo, iter->szotar.szoparok_tomb[0][j]) == 0) {
+                            if(!van_e_barmelyikben)
+                                printf("A %s-nek az alabbi megfeleloi, az allabi nyelveken:\n");
+                            van_e_barmelyikben = true;
+
+                            printf("%s - %s", iter->szotar.nyelv1, iter->szotar.szoparok_tomb[0][j]);
+                            j++;
+                        }
+                        if(strcmp(Keresett_Szo, iter->szotar.szoparok_tomb[1][j]) == 0) {
+                            if(!van_e_barmelyikben)
+                                printf("A %s-nek az alabbi megfeleloi, az allabi nyelveken:\n");
+                            van_e_barmelyikben = true;
+
+                            printf("%s - %s", iter->szotar.nyelv2, iter->szotar.szoparok_tomb[1][j]);
+                            j++;
+                        }
+                    }
+                }
+
+            } break;
+            */
+            case 4: {
+                Torol_Szotar_Felirat();
+
+                char Keresett_Szo[50 + 1];
+                Szoveg_Beolvas(true, "Add meg a szot, amelynek az osszes nyelven elerheto megfelelojet szeretned megtekinteni, ha szerepel valamelyik szotarban: ", Keresett_Szo, -1, "", true, "Nem tartalmazhat egy szo szamot!"
+                );
+
+                bool van_e_barmelyikben = false;
+                int j = 0;
+                for (Lista *iter = Fo_Lista; iter != NULL; iter = iter->kov) {
+                    for (int i = 0; i < iter->szotar.szoparok_szama; i++) {
+                        // Ellenőrizd az első nyelvet (nyelv1 -> nyelv2 megfelelés)
+                        if (strcmp(Keresett_Szo, iter->szotar.szoparok_tomb[0][i]) == 0) {
+                            if (!van_e_barmelyikben) {
+                                printf("\n\tA(z) '%s'-nak/nek az alabbi megfeleloi, az alabbi nyelveken:\n", Keresett_Szo);
+                                van_e_barmelyikben = true;
+                            }
+                            printf("\t%s - %s\n", iter->szotar.szoparok_tomb[1][i], iter->szotar.nyelv2);
+                        }
+                        // Ellenőrizd a második nyelvet (nyelv2 -> nyelv1 megfelelés)
+                        if (strcmp(Keresett_Szo, iter->szotar.szoparok_tomb[1][i]) == 0) {
+                            if (!van_e_barmelyikben) {
+                                printf("\n\tA(z) '%s'-nak/nek az alabbi megfeleloi, az alabbi nyelveken:\n", Keresett_Szo);
+                                van_e_barmelyikben = true;
+                            }
+                            printf("\t%s - %s\n", iter->szotar.szoparok_tomb[0][i], iter->szotar.nyelv1);
+                        }
+                    }
+                }
+
+                if (!van_e_barmelyikben) {
+                    Tovabb_Gombra("\t>>> HIBA: A keresett szo nem talalhato meg egyik szotarban sem!<<<");
+                } else {
+                    Tovabb_Gombra("\tSIKER: A keresett szo megfeleloi ki lettek irva!");
+                }
+            } break;
+        
+            case 5: {
                 Konzol_Torles();
                 printf("\n\t       _                    _   _   __  _    __                \n");
                 printf("\t__   _(_)___ _______  _ __ | |_| | /_/_| |_ /_/_ ___ _ __ __ _ \n");
@@ -393,7 +465,7 @@ int main() {
                 printf("\t>>> HIBA: Ervenytelen menupontot adott meg! <<<");
             } break;
         }
-    } while(Valasztott_Menupont != 4);
+    } while(Valasztott_Menupont != 5);
 
     L_Felszabadit(Fo_Lista);
 
