@@ -49,8 +49,9 @@ void Menu_Opciok() {
     printf("\t[1] - Uj szotar letrehozasa\n");
     printf("\t[2] - Meglevo szotar torlese\n");
     printf("\t[3] - Szotar fajlbol olvasasa\n");
-    printf("\t[4] - Kilepes\n\n");
-    printf("\tValassz egy menu pontot [0-4]: ");
+    printf("\t[4] - Keresett szo megfeleloinek kiirasa\n");
+    printf("\t[5] - Kilepes\n\n");
+    printf("\tValassz egy menu pontot [0-5]: ");
 }
 
 // Kiírja a szótár menü pontjait.
